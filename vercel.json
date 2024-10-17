@@ -3,12 +3,27 @@
     "builds": [
     {
         "src": "learning_log/wsgi.py",
-        "use": "@vercel/python"
+        "use": "@vercel/python",
+        "config": {
+        "maxLambdaSize": "50mb",
+        "runtime": "python3.10"
+        }
+    },
+    {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",  
+        "config": {
+        "distDir": "static_build"
+        }
     }
     ],
     "routes": [
     {
-        "src": "/(.*)",
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+    },
+    {
+        "src": "/(.*)",  
         "dest": "learning_log/wsgi.py"
     }
     ]
