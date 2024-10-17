@@ -1,8 +1,15 @@
 {
+    "version": 2,
+    "builds": [
+    {
+        "src": "learning_log/wsgi.py",
+        "use": "@vercel/python"
+    }
+    ],
     "routes": [
     {
         "src": "/(.*)",
-        "dest": "learning__log/wsgi.py"
+        "dest": "learning_log/wsgi.py"
     }
     ]
 }
