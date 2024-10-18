@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.template import RequestContext
+
 def register(request):
     """Register a new user."""
     if request.method != 'POST':
@@ -16,5 +18,5 @@ def register(request):
             login(request, new_user)
             return redirect('learning:index')
     # Display a blank or invalid form.
-    context = {'form': form}
-    return render(request, 'registration/register.html', context)
+    c = {'form': form}
+    return render(request, 'registration/register.html', c, context_instance=RequestContext(request))
