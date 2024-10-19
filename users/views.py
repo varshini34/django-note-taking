@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.template import RequestContext
+from django.contrib.auth.views import LogoutView
 
 def register(request):
     """Register a new user."""
@@ -18,5 +19,17 @@ def register(request):
             login(request, new_user)
             return redirect('learning:index')
     # Display a blank or invalid form.
-    c = {'form': form}
-    return render(request, 'registration/register.html', c, context_instance=RequestContext(request))
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('learning:index')  # Redirect to the index page after logout
+    # Handle GET request by rendering a confirmation page
+    return render(request, "learning/logout.html")
+
+#class PatchLogoutView(LogoutView):
+    #http_method_names = ["get", "post", "options"]
+    #def get(self, request, *args, **kwargs):
+        #return self.post(request, *args, **kwargs)

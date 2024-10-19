@@ -1,7 +1,8 @@
-"""Defines URL patterns for learning_logs."""
 from django.urls import path
 from . import views
 from django.shortcuts import render
+from django.contrib.auth import views as auth_views
+from .views import logout_view
 
 app_name = 'learning'
 
@@ -17,7 +18,9 @@ urlpatterns = [
     # Page for adding a new entry
     path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry'),
     # Page for editing an entry.
-    path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry')
+    path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry'),
+    
+    
 ]
 
 def custom_404(request, exception):

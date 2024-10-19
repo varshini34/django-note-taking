@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 import os
 import environ
 from pathlib import Path
+from distutils.utils import strtobool
 
 # Initialize the environ
 env = environ.Env()
@@ -32,7 +33,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(env('DEBUG'))
+#DEBUG = bool(env('DEBUG'))
+DEBUG = strtobool(env('DEBUG'))
 
 ALLOWED_HOSTS = ['django-note-taking.onrender.com','127.0.0.1', '.vercel.app']
 
@@ -42,6 +44,7 @@ ALLOWED_HOSTS = ['django-note-taking.onrender.com','127.0.0.1', '.vercel.app']
 INSTALLED_APPS = [
     'learning',
     'users',
+    'learning_log',
     'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -114,6 +117,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -141,6 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # My settings
 LOGIN_URL = 'users:login'
+LOGOUT_REDIRECT_URL = 'learning:index'
 
 WSGI_APPLICATION = 'learning_log.wsgi.app'
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.http import Http404
 
 def index(request):
@@ -84,3 +85,17 @@ def edit_entry(request, entry_id):
             return redirect('learning:topic', topic_id=topic.id)
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning/edit_entry.html', context)
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('learning:index')  # Redirect to the index page after logout
+    # Handle GET request by rendering a confirmation page
+    return render(request, "learning/logout.html")
+
+
+
+
