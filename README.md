@@ -1,6 +1,6 @@
-###Django_Note_Taking_Web_Application
+### Django Note Taking Web Application
 
-##Check out the live application [here]([https://your-web-app-url.com](https://django-note-taking.onrender.com/)).
+## Check out the live application [here](https://django-note-taking.onrender.com/).
 
 ## Home Page
 ![Home Page](./WebPages/home.jpg)
