@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 import os
 import environ
 from pathlib import Path
-from distutils.utils import strtobool
+from distutils.util import strtobool
 
 # Initialize the environ
 env = environ.Env()
